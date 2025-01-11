@@ -1,0 +1,28 @@
+# Epidemic Simulation Pseudocode
+
+# 1. Initialization
+N = 100  # Number of agents in the environment
+environment_size = 100  # Size of the environment (e.g., 100x100 units)
+positions = initialize_random_positions(N, environment_size)  # Random (x, y) positions for each agent
+statuses = ["healthy"] * N  # All agents start healthy
+statuses[random.choice(range(N))] = "infected"  # Randomly choose one "Patient Zero"
+D_infect = 2.0  # Infection threshold distance
+
+# 2. Simulation Loop
+while not all_infected(statuses):
+    # 2.1 Move agents randomly
+    for i in range(N):
+        positions[i] = move_randomly(positions[i], environment_size)
+    
+    # 2.2 Check infection spread
+    for i in range(N):
+        for j in range(i + 1, N):  # Check each pair of agents
+            if distance(positions[i], positions[j]) <= D_infect:
+                if statuses[i] == "infected" or statuses[j] == "infected":
+                    statuses[i] = "infected"
+                    statuses[j] = "infected"
+    
+    # 2.3 Optionally log the number of infected agents for visualization
+
+# 3. End Simulation
+print("Simulation complete. All agents infected.")
