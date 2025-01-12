@@ -13,7 +13,7 @@ while not all_infected(statuses):
     # 2.1 Move agents randomly
     for i in range(N):
         positions[i] = move_randomly(positions[i], environment_size)
-    
+
     # 2.2 Check infection spread
     for i in range(N):
         for j in range(i + 1, N):  # Check each pair of agents
